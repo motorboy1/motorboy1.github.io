@@ -1,0 +1,276 @@
+$(document).ready(function () {
+	// swiper-carousel 컨텐츠 1개일 때 제어
+	if($(document).has('.swiper-container').length > 0 && CMS.siteId != 'intdev'){
+		$('.swiper-container').each(function(){					
+			if($(this).find('.swiper-slide:not(.swiper-slide-duplicate)').length === 1){  //공유사이트의 cms-common.js가 먼저 실행되기 때문에 length를 3이 아닌 1로 적용
+				$(this).find('.swiper-wrapper').addClass("disabled");
+			}					
+		});
+	}
+
+	// 학과용 레이어 팝업
+	App.PopupCtrl.init();
+	App.SetCMSLogin.init();
+	
+	//스크롤바 깨지는 오류 때문에 추가
+	if(typeof global_mainVisualSwiper !== 'undefined'){
+		global_mainVisualSwiper.update();
+	}
+
+	// 교수진 pre 내의 <br> 태그 삭제
+	if($('.b-prof-list').find('pre').length > 0) {
+		$('.b-prof-list').find('pre').each(function() {
+			var txt = $(this).text();
+			$(this).text(txt.replace(/(<([^>]+)>)/ig,""));
+		})
+	}
+
+	// 찾아오시는길 오타 수정
+	if($('.location-info-box').find('ul li').length > 0) {
+		$('.location-info-box').find('ul li').each(function() {
+			var txt = $(this).text();
+			$(this).text(txt.replace('시외교금','시외요금'));
+		})
+	}
+
+	if($('body').hasClass('main') && $('.wrap').hasClass('temp07')) {
+		// 메인 푸터가 메인 콘텐츠 수정 버튼으로 수정되지 않는 현상 수정
+		$('.cms-front-edit .front-edit').on('click', function() {
+			setTimeout(function() {
+			$('footer .cms-edit-wrap').appendTo('.main-visual-left-box');	
+			}, 200)
+		})	
+	}
+
+});
+
+//-----------------------------------------------------------------------------------------
+// Layer Popup 기본 세팅
+//-----------------------------------------------------------------------------------------
+App.SetDeptLayerPopup = function() {
+	var self;
+	return {
+		init: function() {
+			self = this;
+
+			// 학과용 레이어 팝업 레이아웃 정리
+			if($('.layer-popup-wrap[data-popup-container]').length > 0) {
+				$('.layer-popup-wrap[data-popup-container]:eq(0)').before('<div class="layer-popup-outer"></div>');
+				$('.layer-popup-wrap[data-popup-container]').each(function(){
+					$(this).appendTo('.layer-popup-outer');
+					if($(this).find('.layer-dept-popup-box').length > 0) {
+						$(this).find('.layer-dept-popup-box').append('<div class="btn-box"><a class="btn-layer-close" data-popup-day="7" data-popup-key="" href="#popup-close">1주일간 보지않기&nbsp;</a><a class="btn-layer-close" data-popup-day="1" data-popup-key="" href="#popup-close">&nbsp;1일간 보지않기&nbsp;</a><a class="btn-layer-close" data-popup-close="" href="#popup-close">팝업닫기</a></div>');	
+					}
+				})
+			} // end of set popup layout
+
+			// 레이어 팝업 버튼 data key 부여
+			$('.btn-layer-close[data-popup-day]').each(function() {
+				var dataPopupKey = $(this).parents('.layer-popup-wrap').attr('data-layout-popup-key');
+				$(this).attr('data-popup-key', dataPopupKey)
+			}) // end of set data key
+
+			// 레이어 팝업 열기/닫기
+			if($(document).has('.layer-popup-wrap').length > 0){
+				console.log("1");
+				if($('.layer-popup-outer').find('.layer-popup-wrap').not('.hide-important').length > 0){
+					console.log("2");
+					$('.layer-popup-outer').addClass('on');
+					$('html,body').addClass('all-fixed');
+				} else{
+					console.log("3");
+					$('.layer-popup-outer').removeClass('on');
+					$('html,body').removeClass('all-fixed');
+				}
+				console.log("4");
+			} // end of close button
+
+		}
+	}
+}();
+
+//-----------------------------------------------------------------------------------------
+// Layer Popup n일간 열지 않기 처리
+//-----------------------------------------------------------------------------------------
+App.PopupCtrl = function() {
+	var self;
+	return {
+		// 윈도우 오픈
+		openWindow: function( opt ) {
+
+			if(this.isShow(opt.key)) {
+				var defOpt = ['top','left','width','height','scrollbars','resiable'], optStr = '';
+				for(var i=0; i<defOpt.length; i++) {
+					var key = defOpt[i], value = opt[key];
+					optStr += !isEmpty(value) ? (key +'='+ value +',') : '';
+				}
+				optStr = optStr.endsWith(',') ? optStr.substring(0,optStr.length-1) : optStr;
+
+				window.open(opt.url, opt.key, '\''+optStr+'\'');
+			};
+
+		},
+		// 레이아웃 팝업 활성 체크
+		showHideLayoutPopup: function() {
+
+			$('[data-layout-popup-key]').each(function() {
+				var $el = $(this), popupKey = $el.attr('data-layout-popup-key');
+				if(self.isShow( popupKey )) {
+					$el.removeClass('hide-important')
+				} else {
+					$el.addClass('hide-important')
+				}
+			});
+
+		},
+		isShow: function( key ) {
+
+			var json = {key: key.replace(/\//g,'-'), closeDate: undefined}, isShow = true, curDt = moment();
+
+			try {
+				json = JSON.parse(localStorage.getItem(json.key));
+				if(json.day == undefined || json.day == 0 || json.closeDate == undefined || !json.closeDate) {
+					// 무조건 오픈
+				} else {
+					// 조건에 따른 오픈
+					var closeDate = moment(json.closeDate);
+					closeDate.add(json.day, 'days');
+					isShow = curDt.isAfter(closeDate);
+				};
+			} catch(e) {
+				try {
+					// 쿠키로 판단.
+					isShow = isEmpty($.cookie(key));
+					localStorage.clear();
+				} catch(e2) {}
+			};
+
+			return isShow;
+		},
+		init: function() {
+
+			self = this;
+
+			this.showHideLayoutPopup();
+			App.SetDeptLayerPopup.init();
+
+			// 팝업 버튼을 찾아서 nn일간 닫기 처리
+			$('[data-popup-key]').each(function() {
+				var $item = $(this);
+				$item.click(function(e) {
+
+					e.preventDefault();
+
+					var $btn = $(this)
+					, key = $btn.attr('data-popup-key').replace(/\//g,'-')
+					, isLayer = $btn.closest('[data-popup-container]').length > 0
+					, day = parseInt($btn.attr('data-popup-day') || 1);
+
+					// 쿠키 설정
+					$.cookie(key, 'Y', { expires: day , path:'/' });
+
+					try {
+						// localStorage
+						localStorage.setItem(key,JSON.stringify({
+							key: key,
+							day: day,
+							closeDate: moment().format('YYYYMMDDhhmmss')
+						}));
+
+					} catch(e) {}
+
+					if(isLayer) {
+
+						$btn.closest('[data-popup-container]').hide();
+
+					} else { // window
+
+						window.close();
+					}
+
+				});
+
+			});
+
+			// 팝업 닫기
+			$('[data-popup-close], .btn-layer-close').on('click', function(e) {
+				e.preventDefault();
+
+				var $btn = $(this)
+				, isLayer = $btn.closest('[data-popup-container]').length > 0;
+
+				if(isLayer) {
+					$btn.closest('[data-popup-container]').hide();
+				} else { // window
+					window.close();
+				}
+
+				var layerLeng = $('.layer-popup-outer').find('.layer-popup-wrap:visible').length;
+
+				if(layerLeng === 0){
+					$('.layer-popup-outer').removeClass('on');
+					$('.layer-popup-outer').hide();
+					$('html,body').removeClass('all-fixed');
+				}
+				
+				if(typeof global_mainVisualSwiper !== 'undefined'){
+					global_mainVisualSwiper.update();
+				}
+				
+			});
+		}
+	}
+}();
+
+//-----------------------------------------------------------------------------------------
+// CMS Login 
+//-----------------------------------------------------------------------------------------
+App.SetCMSLogin = function() {
+	var self;
+	return {
+		init: function() {
+			self = this;
+
+			/*CMS 로그인 뒤 붙여줌*/
+			var loginText = $( '.top-header-box ul li:contains("로그인")' );
+			var cmsText = $( '.top-header-box ul li:contains("CMS")' );
+			
+			/*if(locale == 'en'){
+				loginText = $( '.top-header-box ul li:contains("Login")' );
+			}*/
+
+
+			self.ajaxCMS(loginText, cmsText);
+
+			$( '.top-header-box ul li:contains("로그아웃")' ).click(function(){
+				self.ajaxCMS(loginText, cmsText);
+			});
+		},
+		ajaxCMS : function(loginText, cmsText){
+
+			if(loginText.length && !cmsText.length){
+				$.ajax({
+					url: '/temp01/index.do',
+					dataType: 'html',
+					success: function(data) {
+						var $header = $(data).find('.top-header-box ul');
+						var liIndex = $(".top-header-box ul li").index($( '.top-header-box ul li:contains("로그인")' ));
+
+						$.each( $header.find('li') , function(index, item){
+
+							var text = $(this).find('a').text();
+
+							$(this).find('a').attr('href', '/_fox/login.do?referer=/' + CMS.siteId + '/index.do');
+
+							if(text == 'CMS'){
+								$('.top-header-box ul li').eq(liIndex).after($(this));
+							}
+
+						});
+					}
+				});
+			}
+
+		}
+	}
+}();

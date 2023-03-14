@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+.main-content-box01 .main-mini-wrap{padding:90px 0 85px;}
+.main-content-box01 .main-mini-wrap:after{content:"";display:block;clear:both;}
+.main-content-box01 .main-mini-box{position:relative;float:left;padding:40px;width:50%;box-sizing:border-box;}
+.main-content-box01 .main-mini-box .viewmore{display:none;position:absolute;top:5px;right:0;width:24px;height:24px;background:url(../img/main/ico-mini-more-b.png) no-repeat 0 0/100%;}
+.main-content-box01 .main-mini-box02 .viewmore{background-image:url(../img/main/ico-mini-more-w.png)}
+
+.main-content-box01 .main-mini-box01{background-color:#fff;}
+.main-content-box01 .main-mini-box02{background-color:#0d3f7a;}
+
+@media screen and (max-width:768px) {
+	.main-content-box01 .main-mini-wrap{margin:0;padding:0 0 30px;}
+	.main-content-box01 .main-mini-box{float:none;padding:30px 20px;width:100%;}
+	.main-content-box01 .main-mini-box .main-title{margin:0 0 18px 0;padding:0 0 13px 0;border-width:1px;}
+	.main-content-box01 .main-mini-box .viewmore{width:16px;height:16px;}
+}

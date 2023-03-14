@@ -1,0 +1,21 @@
+var global_mainVisualSwiper;
+
+$(document).ready(function(){
+	// 메인 비주얼 실행
+	var mainVisualSwiper = new Swiper('.main-vi-swiper', {
+		loop: true,
+		slidesPerView: 'auto',
+		speed: 500,
+		pagination: {
+			el: '.main-vi-pagination',
+			type: 'bullets',
+			clickable: true
+		},
+		navigation: {
+			prevEl: '.main-vi-prev',
+			nextEl: '.main-vi-next',
+		}
+	});
+	
+	global_mainVisualSwiper = mainVisualSwiper;
+});

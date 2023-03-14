@@ -1,0 +1,68 @@
+$(document).ready(function () {
+	//-----------------------------------------------------------------------------------------
+	// 실행문
+	//-----------------------------------------------------------------------------------------
+	App.mGnb.init();	
+});
+
+//-----------------------------------------------------------------------------------------
+//mobile Gnb
+//-----------------------------------------------------------------------------------------
+App.mGnb = function () {
+	var self;
+	return {
+		init: function () {
+
+			$('nav.slideMenu').after($('.slide-close'));
+			
+			// 열기/닫기 
+			$('.btn-menu').click(function() {
+				$('.slideMenu').addClass('on');
+				$('.m-gnb-bg').show();
+				$('.slide-close').show();
+				$('html, body').addClass('all-fixed')
+			});
+
+			$('.slide-close').click(function() {
+				$('.slideMenu').removeClass('on');
+				$('.m-gnb-bg').hide();
+				$('.slide-close').hide();
+				$('html, body').removeClass('all-fixed')
+			});
+
+			$(window).resize(function(){
+				if($(window).width() > 1024){
+					$('.slideMenu').removeClass('on');
+					$('.m-gnb-bg').hide();
+					$('.slide-close').hide();
+					$('html, body').removeClass('all-fixed')
+				}
+			});
+
+			setMobileMenu();
+			function setMobileMenu() {
+				// 하위 메뉴가 있을 경우 상위 메뉴에 클래스 부여
+				$('.m-gnb ul').each(function() {
+					$(this).parent('li').addClass('collapse');
+				});
+				// 모바일 메뉴 현재 페이지 표시 기능
+				$('.m-gnb a').each(function() {
+					var menuCd = 'mobile-menu-' + CMS.menuCd;
+					if($(this).attr('id') === menuCd) $(this).parent('li').addClass('current');
+				});
+				// 현재 페이지 상위 메뉴 오픈
+				$('.m-gnb .current').parentsUntil('.slideMenu', 'li').addClass('on');
+				$('.m-gnb li.on > ul').each(function() {
+					$(this).show();
+				});
+			}
+
+			// 모바일 메뉴 제어
+			$(document).on('click', '.m-gnb .collapse > a', function(e) {
+				e.preventDefault();
+				$(this).next('ul').stop(true).slideToggle('fast').parent('li').toggleClass('on');	
+				$(this).parent('li').siblings().removeClass('on').children('ul').stop(true).slideUp('fast');
+			});
+		}
+	}
+}();

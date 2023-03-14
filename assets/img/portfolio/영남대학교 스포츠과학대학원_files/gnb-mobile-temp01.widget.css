@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+.btn-menu{display:none;}
+.slideMenu{display:none;}
+.m-gnb-bg{display:none;}
+
+@media screen and (max-width:1024px) {
+	.btn-menu{display:block;position:relative;float:right;z-index:10;margin:20px 0 0;width:23px;height:20px;}
+	.btn-menu span{position:absolute;top:50%;right:0;margin:-1.5px 0 0;width:23px;height:2px;background:#000;text-indent:-9999px;color:transparent;}
+	.btn-menu:before,
+	.btn-menu:after{content:'';display:block;position:absolute;left:0;width:100%;height:2px;background:#000;}
+	.btn-menu:before{top:0;}
+	.btn-menu:after{bottom:0;}
+
+	.slideMenu{display:block;position:fixed;top:0;right:-100%;z-index:300;width:70%;height:100%;background:#fff;overflow-y:auto;box-sizing:border-box;opacity:0;visibility:hidden;transition:all .3s;}
+	.slideMenu.on{display:block;right:0;opacity:1;visibility:visible;}
+
+	.dep1{background:#fff;}
+	.dep1 > li > a{display:block;position:relative;padding:15px 40px 15px 20px;background:#013567;font-size:1.142rem;line-height:1.642rem;color:#fff;}
+	.dep1 > li.collapse.on > a{}
+	.dep1 > li.collapse > a:after{content:'';display:block;position:absolute;top:50%;right:20px;width:22px;height:22px;background:url(/_res/yu/_share/img/temp01/ico-m-menu-list01.png) no-repeat center center/100%;transform:translateY(-50%);}
+	.dep1 > li.collapse.on > a:after{background-image:url(/_res/yu/_share/img/temp01/ico-m-menu-list01-on.png);}
+	.dep1 > li > a[target="_blank"] span:after{content:'';display:inline-block;position:relative;margin:0 0 0 5px;width:15px;height:13px;background:url(/_res/yu/_share/img/common/bg-link02-w.png) no-repeat center center/100%;}
+
+	.dep2{display:none;background-color:#fff;}
+	.dep2 > li > a{display:block;position:relative;padding:12px 40px 12px 30px;background:#f4f4f6;font-size:1rem;line-height:1.5rem;color:#555;font-weight:500;}
+	.dep2 > li.current > a{color:#013567;font-weight:500;}
+	.dep2 > li.collapse.on > a{color:#013567;font-weight:500;}
+	.dep2 > li.collapse > a:after{content:'';display:block;position:absolute;top:50%;right:20px;width:16px;height:16px;background:url(/_res/yu/_share/img/temp01/ico-m-menu-list02.png) no-repeat center center/100%;transform:translateY(-50%);}
+	.dep2 > li.collapse.on > a:after{background-image:url(/_res/yu/_share/img/temp01/ico-m-menu-list02-on.png);}
+	.dep2 > li > a[target="_blank"] span:after{content:'';display:inline-block;position:relative;margin:0 0 0 5px;width:13px;height:11px;background:url(/_res/yu/_share/img/common/bg-link03.png) no-repeat center center/100%;}
+	
+	.dep3{display:none;padding:8px 0;}
+	.dep3 > li > a{display:block;padding:6px 20px 6px 35px;font-size:1rem;line-height:1.5rem;color:#555;}
+	.dep3 > li.current > a{color:#013567;font-weight:500;}
+	.dep3 > li > a[target="_blank"] span:after{content:'';display:inline-block;position:relative;margin:0 0 0 5px;width:13px;height:11px;background:url(/_res/yu/_share/img/common/bg-link03.png) no-repeat center center/100%;}
+	
+	.dep4, .dep5{display:none;}
+
+	.set-group{float:right;width:100%;background-color:#fff;color:#000;font-size:1.125rem;}
+	.slide-close{display:none;position:fixed;top:23px;right:75%;z-index:9999;width:20px;height:20px;background:url(/_res/yu/_share/img/temp01/btn-m-menu-close.png) no-repeat 0 0/100%;}
+	.m-gnb-bg{display:none;position:fixed;top:0;left:0;z-index:200;width:100%;height:100%;background-color:rgba(0,0,0,0.8);}
+
+	.m-util ul{display:table;width:100%;table-layout:fixed;text-align:center;}
+	.m-util ul li{display:table-cell;width:100%;border-right:1px solid #e0e0e0;vertical-align:middle;box-sizing:border-box;}
+	.m-util ul li:last-of-type{border-right:0;}
+	.m-util ul li a{display:block;padding:20px 10px;font-size:1.142rem;line-height:1.642rem;color:#333;font-weight:500;}
+
+	.m-footer{padding:60px 20px 30px;text-align:right;}
+	.m-footer ul li{display:inline-block;position:relative;margin:0 5px 0 0;padding:0 8px 0 0;}
+	.m-footer ul li:last-of-type{margin:0;padding:0;}
+	.m-footer ul li a{font-size:1rem;line-height:1.5rem;}
+	.m-footer ul li:after{content:'';display:block;position:absolute;top:5px;right:0;width:1px;height:12px;background:#555;}
+	.m-footer ul li:last-of-type:after{display:none;}
+	.m-footer ul li.btn-major-guide{display:block;margin:0;padding:0 0 5px;}
+	.m-footer ul li.btn-major-guide:after{display:none;}
+	.m-footer ul li.btn-major-guide a{padding:0 20px 0 0;background:url(/_res/yu/_share/img/common/ico-major-guide-m.png) no-repeat right 1px center/12px;}
+}

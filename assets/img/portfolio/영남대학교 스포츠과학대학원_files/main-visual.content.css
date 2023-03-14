@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+.main-link-outer{position:absolute;bottom:0;left:0;width:100%;}
+.main-link-wrap{background:rgba(25,118,210,0.8);}
+.main-link-box{display:flex;flex-wrap:wrap;margin:0 auto;max-width:1400px;}
+.main-link-box h3{display:flex;justify-content:center;align-items:center;padding:15px 0;width:25%;background:#0d3f7a;font-size:1.875rem;color:#fff;font-weight:400;text-align:center;}
+.main-link-box ul{display:table;table-layout:fixed;width:100%;}
+.main-link-box ul li{display:table-cell;width:100%;border-right:1px solid rgba(255,255,255,.3);box-sizing:border-box;}
+.main-link-box ul li:first-of-type{border-left:1px solid rgba(255,255,255,.3);}
+.main-link-box ul li a{display:block;padding:25px 25px 25px 25px;font-size:1.25rem;line-height:1.75rem;color:#fff;transition:all .3s;}
+.main-link-box ul li a:hover{background-color:rgba(255,255,255,0.3);}
+.main-link-box ul li a span{display:block;padding:0 25px 0 0;background:url(../img/main/ico-mini-more-w02.png) no-repeat right top 5px;}
+
+@media screen and (max-width:768px) {	
+	.main-link-outer{position:static;}
+	.main-link-box{display:block;}
+	.main-link-box h3{padding:12px 0;width:auto;font-size:1.428rem;line-height:1.928rem;}
+	.main-link-box ul{display:block;width:auto;}
+	.main-link-box ul li{display:block;width:auto;border-bottom:1px solid rgba(255,255,255,0.3);}
+	.main-link-box ul li:first-of-type{border-left:none;}
+	.main-link-box ul li a{padding:15px 20px;font-size:1rem;line-height:1.5rem;}
+	.main-link-box ul li a span{display:block;padding:0 20px 0 0;background-position:right top 5px;background-size:13px;}
+}

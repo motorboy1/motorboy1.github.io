@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+/* 푸터 상단 */
+.top-footer-box{display:table;margin:0 auto;width:100%;max-width:1400px;table-layout:fixed;}
+.top-footer-box:after{content:'';display:block;clear:both;}
+
+.footer-util-box{display:table-cell;width:100%;}
+.footer-util-box ul{padding:20px 0;}
+.footer-util-box ul li{display:inline-block;padding:0 15px 0 0;vertical-align:top;}
+.footer-util-box ul li:last-of-type{padding:0;}
+.footer-util-box ul li a{display:inline-block;font-size:1.062rem;line-height:1.562rem;color:#555;font-weight:300;}
+.footer-util-box ul li.privacy a{font-weight:500;}
+
+@media screen and (max-width :1024px) {
+	.footer-util-box ul{padding:23px 0 22px 20px;}
+}
+@media screen and (max-width :768px) {
+	/* 푸터 상단 */
+	.top-footer-box{display:flex;flex-direction:column-reverse;}
+	
+	.footer-util-box{display:block;}
+	.footer-util-box ul{padding:10px 20px;}
+	.footer-util-box ul li a{font-size:0.928rem;line-height:1.428rem;}
+}

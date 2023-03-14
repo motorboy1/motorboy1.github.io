@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+.top-banner-box{display:none;position:relative;z-index:40;background:#f3f3f3;}
+.cms-admin-editing .top-banner-box{display:block;}
+.top-banner-box .main-mini-wrap{margin:0 auto;max-width:1400px;box-sizing:border-box;}
+.top-banner-box .main-mini-box{position:relative;padding:0 26px;}
+.top-banner-box .swiper-wrapper{align-items:center;}
+.top-banner-box .swiper-slide div{padding:15px 10px 30px;}
+.top-banner-box .swiper-slide.no-button div{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;min-height:98px;box-sizing:border-box;}
+.top-banner-box .swiper-slide div p{text-align:center;}
+.top-banner-box .swiper-slide div p a{display:block;font-size:1.25rem;color:#111;line-height:1.75rem;font-weight:500;word-break:keep-all;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden;}
+.top-banner-box .swiper-slide div ul{padding:6px 0 0;text-align:center;}
+.top-banner-box .swiper-slide div ul li a{display:inline-block;padding:0 18px 0 0;max-width:100%;background:url(/_res/yu/_share/img/temp-common/ico-arr-top-banner.png) no-repeat right center;font-size:1.125rem;line-height:1.625rem;color:#666;box-sizing:border-box;}
+.top-banner-box .swiper-slide div ul li a span{display:inline-block;max-width:100%;word-break:keep-all;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden;vertical-align:top;}
+.top-banner-box .swiper-slide div ul li a span:empty{display:none;}
+.top-banner-box .swiper-slide.dept-guide div{padding:0;}
+.top-banner-box .swiper-slide.dept-guide div p{font-size:0;}
+.top-banner-box .swiper-slide.dept-guide div p a{display:inline-block;position:relative;padding:39px 0 38px 150px;max-width:100%;box-sizing:border-box;}
+.top-banner-box .swiper-slide.dept-guide div p a:before{content:'';display:block;position:absolute;bottom:0;left:0;width:122px;height:87px;background:url(/_res/yu/_share/img/temp-common/bg-banner-dept-guide.png) no-repeat center center/100%;}
+
+.top-banner-box .control-wrap{position:absolute;top:50%;left:0;z-index:10;width:100%;}
+.top-banner-box .control-wrap > div{position:absolute;top:0;width:16px;height:32px;cursor:pointer;transform:translateY(-50%);}
+.top-banner-box .control-wrap .top-banner-prev{left:0;background:url(/_res/yu/_share/img/temp-common/bg-top-banner-prev.png) no-repeat 0 0/contain;}
+.top-banner-box .control-wrap .top-banner-next{right:0;background:url(/_res/yu/_share/img/temp-common/bg-top-banner-next.png) no-repeat 0 0/contain;}
+
+.top-banner-box .top-banner-pagination{position:absolute;bottom:15px;left:0;width:100%;z-index:10;font-size:0;text-align:center;}
+.top-banner-box .top-banner-pagination .swiper-pagination-bullet{margin:0 6px 0 0;width:13px;height:3px;background:#666;border-radius:0;opacity:1;}
+.top-banner-box .top-banner-pagination .swiper-pagination-bullet-active{width:45px;background:#0d3f7a;}
+.top-banner-box .top-banner-pagination .swiper-pagination-bullet:last-of-type{margin:0;}
+
+.top-banner-box .banner-chk-box{display:none;position:absolute;bottom:10px;right:0;z-index:10;width:100%;line-height:1;text-align:center;}
+.top-banner-box .banner-chk-box .btn-banner-close{display:inline-block;background:url(/_res/yu/_share/img/temp-common/btn-top-banner-close.png) no-repeat center center/12px;}
+
+.no-banner .top-banner-wrap{display:none;}
+.no-banner .btn-banner{visibility:hidden;}
+.no-banner .top-banner-box .control-wrap{display:none;}
+
+/* 학과 템플릿 전공가이드용 레이어 팝업 */
+.layer-popup-wrap.popup-dept{z-index:9999;}
+.layer-popup-wrap.popup-dept .b-popup-box{max-width:1500px;overflow:hidden;}
+.layer-popup-wrap.popup-dept .b-popup-box .b-popup-content-box{margin:-1px;padding:0;overflow:hidden;}
+.popup-dept iframe{width:100% !important;height:60vh !important;}
+
+@media screen and (max-width:1024.98px) {
+	.top-banner-box .main-mini-wrap{padding:0;}
+	.top-banner-box .main-mini-box{padding:0;}
+	.top-banner-box .swiper-slide{width:100%;}
+	.top-banner-box .swiper-slide div{padding:8px 40px 22px;}
+	.top-banner-box .swiper-slide.no-button div{min-height:89px;}
+	.top-banner-box .swiper-slide div p a{font-size:1rem;line-height:1.2rem;}
+	.top-banner-box .swiper-slide div ul{padding:2px 0 0;}
+	.top-banner-box .swiper-slide div ul li a{padding:0 12px 0 0;background-size:5px;font-size:0.928rem;line-height:1.428rem;}
+	
+	.top-banner-box .swiper-slide.dept-guide{background-color:#d6e2f2;}
+	.top-banner-box .swiper-slide.dept-guide div{padding:0 40px;}
+	.top-banner-box .swiper-slide.dept-guide div p a{padding:30px 0 30px 95px;}
+	.top-banner-box .swiper-slide.dept-guide div p a:before{width:85px;height:61px;}
+		
+	.top-banner-box .top-banner-pagination{bottom:10px;}
+	.top-banner-box .top-banner-pagination .swiper-pagination-bullet-active{width:28px;}
+	
+	.top-banner-box .banner-chk-box{display:block;top:10px;bottom:auto;width:auto;text-align:right;}
+	.top-banner-box .banner-chk-box .btn-banner-close{padding:0 10px;width:12px;height:12px;}
+
+	
+	.top-banner-box .control-wrap > div{margin:0 0 0 0;width:10px;height:20px;}
+	.top-banner-box .control-wrap .top-banner-prev{left:20px;background-image:url(/_res/yu/_share/img/temp-common/bg-top-banner-prev-m.png);}
+	.top-banner-box .control-wrap .top-banner-next{right:20px;background-image:url(/_res/yu/_share/img/temp-common/bg-top-banner-next-m.png);}
+}

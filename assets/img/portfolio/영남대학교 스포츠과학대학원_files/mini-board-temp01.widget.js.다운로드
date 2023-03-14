@@ -1,0 +1,7 @@
+$(document).ready(function() {
+	// main content01 미니보드 탭
+	$('.mini-board-tab').on('click', function () {
+		$(this).parent().siblings().removeClass('active');
+		$(this).parent().addClass('active');
+	});
+})

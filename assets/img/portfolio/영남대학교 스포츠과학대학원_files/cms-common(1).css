@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+@import url(/_res/yu/_share/css/temp-common.css);
+@import url(/_res/yu/_share/css/sub-guide-temp01.css);
+
+/* layout */
+.top-header-wrap{position:relative;background-color:#003366;}
+.bottom-header-wrap{position:relative;}
+.container{background-color:#f2f5f9;}
+.main-visual-wrap{position:relative;}
+.main-content-wrap04{position:relative;}
+.top-footer-wrap{border-top:1px solid #ccc;border-bottom:1px solid #ccc;}
+.sub-content-wrap{display:table;margin:0 auto;padding:0 0 100px;width:100%;max-width:1400px;table-layout:fixed;}
+.lnb-wrap{display:table-cell;padding:0 60px 0 0;width:210px;vertical-align:top;}
+.content-wrap{display:table-cell;width:100%;vertical-align:top;}
+
+/* 메인컨텐츠 공통 */
+.main-mini-wrap{margin:0 auto;max-width:1400px;}
+.main-title{font-size:1.875rem;line-height:2.375rem;font-weight:500;color:#111;}
+
+@media screen and (max-width:1024.98px) {	
+	/* layout */
+	.top-header-wrap{display:none;}
+	.sub-content-wrap{display:block;}
+	.lnb{display:none;}
+	.content-wrap{display:block;padding:0 20px;box-sizing:border-box;}
+}
+@media screen and (max-width:768px) {
+	/* common */
+	html{font-size:14px;}
+	
+	/* layout */
+	.sub-content-wrap{padding:0 0 40px 0;}
+
+	/* 메인컨텐츠 공통 */
+	.main-title{font-size:1.428rem;line-height:1.928rem;}
+}
